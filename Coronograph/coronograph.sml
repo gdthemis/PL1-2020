@@ -5,7 +5,7 @@ fun parse file option =
 
 	(* Open input file. *)
     	val inStream = TextIO.openIn file
-        (* Read an integer (number of countries) and consume newline. *)
+        (* Read an integer and consume newline. *)
         (* A function to read N integers from the open file. *)
 	fun readInts 0 acc = acc (* Replace with 'rev acc' for proper order. *)
 	  | readInts i acc = readInts (i - 1) (readInt inStream :: acc)
@@ -88,17 +88,17 @@ fun getNodes (pipa,y,z) =
 fun printList [x] = if x = 0 then () else print(Int.toString(x))
   | printList (x::xs) = if x = 0 then printList xs else (print(Int.toString(x)); print(" "); printList xs)
 
-fun teliko3 (a,b,c) = (if c = true then( print("CORONA "); print(Int.toString(b)); print("\n");  printList a; print("\n")) else (print("NO CORONA\n")))
+fun finalOut (a,b,c) = (if c = true then( print("CORONA "); print(Int.toString(b)); print("\n");  printList a; print("\n")) else (print("NO CORONA\n")))
 
-fun teliko aux1 = teliko3(getNodes(dfs 0 (adjList aux1))) 
+fun teliko aux1 = finalOut(getNodes(dfs 0 (adjList aux1))) 
 
-fun teliko1 (a,b,c,d) =  (if c <> (List.length(d) div 2) then (print("NO CORONA\n")) else (teliko3 (getNodes(dfs 0 (adjList (a,b,c,d))))))
+fun callDfs (a,b,c,d) =  (if c <> (List.length(d) div 2) then (print("NO CORONA\n")) else (finalOut (getNodes(dfs 0 (adjList (a,b,c,d))))))
 
-fun coronograph pipa = 
+fun coronograph in = 
   let
-    val a = parse (pipa) 0
-    fun go [x] = (teliko1 x)
-      | go (x::xs) = (teliko1 x; go xs)
+    val a = parse (in) 0
+    fun go [x] = (callDfs x)
+      | go (x::xs) = (callDfs x; go xs)
   in
     go a
   end

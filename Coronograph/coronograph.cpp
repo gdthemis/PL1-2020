@@ -37,7 +37,7 @@ public:
         }
         return count;
     }
-    int sum() // επιστρέφει το ολικό άθροισμα όλων των κόμβων
+    int sum() // returns total sum of nodes
     {
         int s = 0;
         for (long unsigned int i = 0; i < cycle.size(); i++) {
@@ -52,15 +52,12 @@ public:
     }
     void printing() {
         sort(trees1.begin(), trees1.end());
-//        cout << "CORONA " << trees1.size() << endl;
         printf("CORONA ");
         printf("%lu", trees1.size());
         printf("\n");
         for (long unsigned int i = 0; i < trees1.size() - 1; i++) {
-//            cout << trees1[i] << " " ;
             printf("%d ", trees1[i]);
         }
-//        cout << trees1[trees1.size()-1]<< endl;
         printf("%d", trees1[trees1.size()-1]);
         printf("\n");
     }
@@ -127,22 +124,6 @@ bool Graph::isCyclic()
 
 int main(int argc, char **argv)
 {
-//     ifstream inFile;
-//       inFile.open(argv[1]);
-//        int i = 0;
-//        int a, q, e;
-//        int b;
-//        inFile >> a;
-//    for (i = 0; i < a; i++) {
-//        inFile >> b;
-//        Graph fuck(b);
-//        int s = b;
-//        inFile >> b;
-//        for (int y = 0; y < b ; y++) {
-//            inFile >> q;
-//            inFile >> e;
-//            fuck.addEdge(q-1,e-1);
-//        }
     int rec;
     FILE * in = fopen(argv[1], "r");
     fscanf(in, "%d", &rec);
@@ -179,6 +160,5 @@ int main(int argc, char **argv)
             }
         }
     }
-//       inFile.close();
 }
 

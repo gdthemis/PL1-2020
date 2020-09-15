@@ -61,10 +61,23 @@ fun main (n,m,c) =
 
     fun advance1 [] time = ()
       | advance1 ((a,b)::xs) time = if (Array2.sub(visited,a,b) = ~1 orelse Array2.sub(visited,a,b) = 1) then 
-      if Array2.sub(world,a,b) = #"A" andalso Array.sub(airflag,0) = ~1 then (Array2.update(visited,a,b,2);(Queue.enqueue(tempQ1,(a,b)));
-      Array.update(airflag,0,1);Array.update(timeReachedAirport,0,time+5);(advance1 xs time))
-      else if Array2.sub(world,a,b) = #"T" then (Array.update(isPosssible,0,1);print("IMPOSSIBLE\n");Queue.clear q1;Queue.clear q2; Queue.clear q3;
-      Queue.clear tempQ1; Queue.clear tempQ2; Queue.clear tempQ3)
+      if Array2.sub(world,a,b) = #"A" andalso Array.sub(airflag,0) = ~1 
+      then (Array2.update(visited,a,b,2);
+      (Queue.enqueue(tempQ1,(a,b)));
+      Array.update(airflag,0,1);
+      Array.update(timeReachedAirport,0,time+5);
+      (advance1 xs time))
+      else if Array2.sub(world,a,b) = #"T" 
+
+      then (Array.update(isPosssible,0,1);
+      print("IMPOSSIBLE\n");
+      Queue.clear q1;
+      Queue.clear q2; 
+      Queue.clear q3;
+      Queue.clear tempQ1; 
+      Queue.clear tempQ2; 
+      Queue.clear tempQ3)
+
       else (Array2.update(visited,a,b,2);Queue.enqueue(tempQ1,(a,b));(advance1 xs time))
       else (advance1 xs time)
 
@@ -78,27 +91,52 @@ fun main (n,m,c) =
       else (advance21 xs)
 
     fun advance3 [] (old1,old2) = ()
-      | advance3 ((a,b)::xs) (old1,old2) = if Array2.sub(visited,a,b) = ~ 1 then if Array2.sub(world,a,b) = #"T" then (Array.update(final,0,(a,b));
-      Queue.clear q1;Queue.clear q2; Queue.clear q3; Queue.clear tempQ1; Queue.clear tempQ2; Queue.clear tempQ3;Array2.update(goBack,a,b,positionLetter (old1,old2) (a,b)))
-                               else (Array2.update(visited,a,b,1);(Queue.enqueue(tempQ3,(a,b)));Array2.update(goBack,a,b,positionLetter (old1,old2) (a,b)); advance3 xs (old1,old2))
-                               else (if Array2.sub(world,a,b) = #"T" then (Array.update(final,0,(a,b)); Queue.clear q1;Queue.clear q2; Queue.clear q3;
-      Queue.clear tempQ1; Queue.clear tempQ2; Queue.clear tempQ3 ;Array2.update(goBack,a,b,positionLetter (old1,old2) (a,b)) ) else (advance3 xs (old1,old2)))
+      | advance3 ((a,b)::xs) (old1,old2) = if Array2.sub(visited,a,b) = ~ 1 then if Array2.sub(world,a,b) = #"T" 
+
+                              then (Array.update(final,0,(a,b));
+                              Queue.clear q1;
+                              Queue.clear q2; 
+                              Queue.clear q3; 
+                              Queue.clear tempQ1; 
+                              Queue.clear tempQ2; 
+                              Queue.clear tempQ3;
+                              Array2.update(goBack,a,b,positionLetter (old1,old2) (a,b)))
+
+                               else (Array2.update(visited,a,b,1);
+                               (Queue.enqueue(tempQ3,(a,b)));
+                                Array2.update(goBack,a,b,positionLetter (old1,old2) (a,b));
+                                advance3 xs (old1,old2))
+
+                                    else (if Array2.sub(world,a,b) = #"T" 
+                                    then (Array.update(final,0,(a,b)); 
+                                    Queue.clear q1;Queue.clear q2; 
+                                    Queue.clear q3;
+                                    Queue.clear tempQ1; 
+                                    Queue.clear tempQ2; 
+                                    Queue.clear tempQ3;
+                                    Array2.update(goBack,a,b,positionLetter (old1,old2) (a,b)) ) 
+            
+                                          else (advance3 xs (old1,old2)))
 
     fun startQ1 q1 time = if time mod 2 = 0 andalso Queue.isEmpty q1 = false then ((advance1 (nextSpot (Queue.dequeue q1) 0) time); startQ1 q1 time)
                           else (if time mod 2 = 0 andalso Queue.isEmpty q1 = true then ((refillQueue q1 tempQ1); Queue.clear tempQ1) else())
 
-    fun startQ2 q2 time = if Array.sub(airflag,0) = 1 andalso time = Array.sub(timeReachedAirport,0) then (advance2 (getAirports 0 0)) else (
-                          if Array.sub(airflag,0) = 1 andalso time > Array.sub(timeReachedAirport,0) andalso time mod 2 = 1 andalso Queue.isEmpty q2 = false
-                          then (advance21 (nextSpot (Queue.dequeue q2) 0); startQ2 q2 time)
-                          else (if Queue.isEmpty q2 = true then ((refillQueue q2 tempQ2); Queue.clear tempQ2) else ()))
+    fun startQ2 q2 time = if Array.sub(airflag,0) = 1 andalso time = Array.sub(timeReachedAirport,0) then (advance2 (getAirports 0 0)) 
+                          else (
+                            if Array.sub(airflag,0) = 1 andalso time > Array.sub(timeReachedAirport,0) andalso time mod 2 = 1 andalso Queue.isEmpty q2 = false
+                            then (advance21 (nextSpot (Queue.dequeue q2) 0); startQ2 q2 time)
+                            else (if Queue.isEmpty q2 = true then ((refillQueue q2 tempQ2); Queue.clear tempQ2) else ()))
 
     fun startQ3 q3 time = if Queue.isEmpty q3 = false then (advance3 (nextSpot (Queue.head q3) 0) (Queue.dequeue q3); startQ3 q3 time)
                           else ((refillQueue q3 tempQ3); Queue.clear tempQ3)
 
-    fun startBfs q1 q2 q3 time = if Queue.isEmpty q1 = true andalso Queue.isEmpty q2 = true andalso Queue.isEmpty q3 = true then(if Array.sub(isPosssible,0) = ~1
-    then (print(Int.toString(time - 1));print("\n");finish (Array.sub(final,0)); print("\n") )else ())
-                            else (startQ1 q1 time ;startQ2 q2 time ;startQ3 q3 time; startBfs q1 q2 q3 (time + 1))
+    fun startBfs q1 q2 q3 time = if Queue.isEmpty q1 = true andalso Queue.isEmpty q2 = true andalso Queue.isEmpty q3 = true 
+                                 then(if Array.sub(isPosssible,0) = ~1
+                                          then (print(Int.toString(time - 1));print("\n");finish (Array.sub(final,0)); print("\n") )else ())
+                                 else (startQ1 q1 time ;startQ2 q2 time ;startQ3 q3 time; startBfs q1 q2 q3 (time + 1))
   in
     getStarting 0 0; getVirusStartingPlace 0 0; startBfs q1 q2 q3 1
   end
+
+  fun stayhome st = main (parse st)    
 

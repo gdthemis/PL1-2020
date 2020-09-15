@@ -20,11 +20,8 @@ vector<int> seira (int N, int K)
 {
     int x = 0, sum = K, temp = 1;
     vector<int> exponents(K+400, 0);
-//    map<int,int> lista;
-//    for (int i = 0; i < K; i++) {
-//        lista[i] = 0;
-//    }
     vector<int> empty(1,-1);
+
     for (int i = 0; i < K; i++) {
         x = 1;
         temp = 1;
@@ -33,10 +30,9 @@ vector<int> seira (int N, int K)
             temp = pow(2,x);
             x++;
             }
-        exponents[x - 1] ++;
-//        cout << x << endl;
-        
+        exponents[x - 1] ++;        
      }
+
     if (sum == N) {
         return exponents;
     }
@@ -54,15 +50,16 @@ int main(int argc, const char * argv[]) {
     vector<int> pinakas;
     while (inFile >> a) {
         pinakas.push_back(a);
-//        cout << pinakas[i] <<endl;
         i++;
     }
+
    inFile.close();
     int j = 1;
     for (i = 0; i < pinakas[0]; i++) {
-//        cout << pinakas[i] <<endl;
     vector<int> test;
+
     test = seira(pinakas[j], pinakas[j+1]);
+
     if (test[0] == -1) {
         cout <<"[]" <<endl;
     }
@@ -75,17 +72,14 @@ int main(int argc, const char * argv[]) {
         else
             break;
     }
+
     cout<<"[";
     for (long unsigned int i = 0; i < test.size() - 1; i++) {
         cout << test[i] << ",";
     }
     cout << test[test.size()-1] <<"]"<<endl;
-//    cout << test[0] << endl;
-        }
+    }
         j += 2;
     }
-//    for (i = 0; i < pinakas.size(); i++) {
-//        cout << pinakas[i] <<endl;
-//    }
     return 0;
 }

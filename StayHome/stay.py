@@ -78,7 +78,7 @@ for i in range(N):
             final = (i,j)
     
 q1 = deque([start]) #starting place
-q2 = deque(airports)#queue with all the airports
+q2 = deque(airports) #queue with all the airports
 q3 = deque([sotiris]) 
 timer = 1
 toQ1 = []
@@ -124,6 +124,7 @@ while len(q1) != 0 or len(q2) != 0 or len(q3) != 0 :
                 toQ2.append(x)
         q2 = deque(toQ2)
         toQ2.clear()
+        
     if airflag == True and timer > timeReachedAirport and timer % 2 == 1:
         while len(q2) != 0 :
             if toBreak == True:
@@ -166,6 +167,7 @@ while len(q1) != 0 or len(q2) != 0 or len(q3) != 0 :
 if jobDone :
     print(timer-1)
     print("".join(finish(goBack,final)))
+    print(goBack)
 
 print("--- %s seconds ---" % (time.time() - start_time))
 
