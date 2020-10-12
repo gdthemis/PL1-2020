@@ -25,7 +25,7 @@ Languages : C++, Standard ML of New Jersey
 
 ### Stay Home :
 
-Given a map of the world, that contains obstacles, paths, Airports and corona virus contaminated places, find a way to reach the final destination from a starting point without being infected. You can walk on the map one step every second. Corona virus is expanding to every neighbour place every 2 seconds but, if corona virus reaches an airport, after 5 seconds all airports will be contaminated. 
+Given a map of the world (NxM array), that contains obstacles, paths, Airports and corona virus contaminated places, find a way to reach the final destination from a starting point without being infected. You can walk on the map one step every second. Coronavirus is expanding to every neighbour place every 2 seconds but, if corona virus reaches an airport, after 5 seconds all airports will be contaminated. 
 
 Languages : Python 3, Standard ML of New Jersey, Java
 
