@@ -35,7 +35,7 @@ Languages : Python 3, Standard ML of New Jersey, Java
 
 Given 2 stacks, one initially empty (stack n.1) and one loaded with the letters "A", "C", "G", "U" (stack n.2), find a way to move all the elements of stack n.2 to stack n.1, so that the letters will be grouped. You have three available moves :
 
-"p" : will push the top element of the loaded stack to the other.
+"p" : will push the top element of stack n.1 to stack n.2.
 
 "c" : will change all the letters of stack n.2 stack to their complements (from the RNA basis, A <-> U, C <-> G).
 
