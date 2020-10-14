@@ -2,11 +2,11 @@
 My solutions to 2020 exercises on course "Programing Languages 1".
 
 As a task on that course, we had 3 assignments with problems that had to be solved in multiple programming languages. Languages used:
-*functional : Standard ML of New Jersey
-*Procedural : C++
-*Scripting : python3
-*Logical : Prolog
-*Object Orianted : Java
+* functional : Standard ML of New Jersey
+* Procedural : C++
+* Scripting : python3
+* Logical : Prolog
+* Object Orianted : Java
 
 ## Problems :
 
