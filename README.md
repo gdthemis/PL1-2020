@@ -1,7 +1,7 @@
 # PL1-2020
 My solutions to 2020 exercises on course "Programing Languages 1".
 
-As a task on that course, we had 3 problem sets with problems that had to be solved in multiple programming languages.
+As a task on that course, we had 3 assignments with problems that had to be solved in multiple programming languages.
 
 ## Problem Set 1 :
 
